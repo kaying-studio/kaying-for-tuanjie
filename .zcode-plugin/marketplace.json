@@ -1,0 +1,39 @@
+{
+  "name": "kaying-for-tuanjie-marketplace",
+  "plugins": [
+    {
+      "name": "tuanjie",
+      "source": {
+        "source": "directory",
+        "path": "D:/code/kaying-office/kaying-for-tuanjie"
+      },
+      "version": "0.1.0",
+      "description": "Tuanjie Engine (团结引擎) game-development skills for coding agents — adapted from Unity's official agent plugin with Tuanjie-specific tooling, WeChat Mini Game awareness, and China-market guidance.",
+      "displayName": "kaying-for-tuanjie",
+      "description_i18n": {
+        "zh-CN": "团结引擎游戏开发技能包（ZCode 版）。基于 Unity 官方 agent 插件移植并针对团结引擎改造：Tuanjie 编辑器命令行自动化、packages.unity.cn 包管理、微信小游戏与国内渠道指引，内含 27 个覆盖 UI、2D/Tilemap、导航、物理、URP 渲染、音频、内购与本地化的技能。",
+        "en-US": "Tuanjie Engine game-development skills for ZCode — ported from Unity's official agent plugin with Tuanjie-specific tooling: editor binary automation, packages.unity.cn registry, WeChat Mini Game and China-market guidance, covering UI, 2D/Tilemap, navigation, physics, URP, audio, IAP, and localization."
+      },
+      "category": "developer-tools",
+      "keywords": [
+        "tuanjie",
+        "团结引擎",
+        "unity-china",
+        "游戏开发",
+        "微信小游戏",
+        "OpenHarmony",
+        "URP",
+        "tilemap",
+        "in-app-purchases",
+        "localization"
+      ],
+      "examplePrompts": [
+        "为我的团结引擎 2D 游戏搭建带规则瓦片（RuleTile）的关卡。",
+        "把一个 Unity 2022 项目迁移到团结引擎，处理包管理器报错。",
+        "帮我的团结引擎项目接入内购，目标渠道是微信小游戏和苹果商店。",
+        "Set up a tilemap level with rule tiles in my Tuanjie 2D game.",
+        "Migrate a Unity 2022 project to Tuanjie Engine and fix package resolution."
+      ]
+    }
+  ]
+}
