@@ -13,26 +13,133 @@ Tilemap set, AI navigation, 3D physics, URP migration and post-processing, sprit
 custom Shader Graph nodes, audio optimization, TextMeshPro optimization, localization, IAP (with
 China channel notes), Tuanjie editor command-line automation, and package management.
 
-## Install (ZCode)
+Available for **Claude Code**, **Codex**, **Pi**, **ZCode**, and **KayingCode**.
 
-Both the plugin manifest and the marketplace manifest live in this repository's `.zcode-plugin/`
-directory (`plugin.json` plugin manifest, `marketplace.json` local test marketplace manifest).
-In the ZCode client:
+## Install
 
-1. **Plugin Marketplace (Discover tab) → `+` Add Marketplace**, paste the `.zcode-plugin`
-   directory path (e.g. `D:\code\kaying-office\kaying-for-tuanjie\.zcode-plugin`), or the file
-   path of its `marketplace.json`.
-2. Find **kaying-for-tuanjie** in the market and click **Install** (plugin ID
-   `tuanjie@kaying-for-tuanjie-marketplace`, enabled by default).
+**Claude Code** — these two are slash commands, so type them inside a Claude Code session
+rather than in a terminal:
 
-> Note: `source.path` in `marketplace.json` is an absolute path pointing at the repository root
-> (ZCode does not allow `..` references outside the marketplace), so update it if the repository
-> moves.
+```
+/plugin marketplace add kaying-studio/kaying-for-tuanjie
+```
+
+```
+/plugin install tuanjie@kaying-for-tuanjie
+```
+
+From a terminal instead, use the `claude` CLI. Installs done this way load the next time you
+start Claude Code, or when you run `/reload-plugins` in an open session:
+
+```bash
+claude plugin marketplace add kaying-studio/kaying-for-tuanjie
+claude plugin install tuanjie@kaying-for-tuanjie
+```
+
+**Codex**
+
+```bash
+codex plugin marketplace add kaying-studio/kaying-for-tuanjie
+```
+
+```bash
+codex plugin add tuanjie@kaying-for-tuanjie
+```
+
+**Pi** — Pi loads packages that declare a `pi` manifest in `package.json` plus the
+`pi-package` keyword. Install from a local checkout, npm, or git:
+
+```bash
+pi install /absolute/path/to/kaying-for-tuanjie
+# or:  pi install ./kaying-for-tuanjie           (relative to your project)
+# or:  pi install npm:kaying-for-tuanjie
+# or:  pi install git:github.com/kaying-studio/kaying-for-tuanjie
+```
+
+`install` writes to user settings (`~/.pi/agent/settings.json`); pass `-l` to write to project
+settings (`.pi/settings.json`) so the whole team shares it. To try it for a single run without
+installing:
+
+```bash
+pi -e ./kaying-for-tuanjie
+```
+
+The Pi port wires the plugin in three places (see `extensions/tuanjie.ts` and
+`.pi-plugin/plugin.json`):
+
+- **`package.json`** — the Pi package manifest: `keywords: ["pi-package"]` for discoverability
+  and `pi.skills` / `pi.extensions` declaring the 27 skills and the extension entry point.
+- **`extensions/tuanjie.ts`** — the Pi extension entry: contributes `skills/` through Pi's
+  `resources_discover` event, sets a footer status inside Tuanjie projects, and registers a
+  `/tuanjie` command (`info | skills | docs | doctor`).
+- **`.pi-plugin/`** — the Pi-side manifest, mirroring the `.claude-plugin/` (Claude Code),
+  `.codex-plugin/` (Codex), `.zcode-plugin/` (ZCode) and `.kayingcode-plugin/` (KayingCode)
+  manifests.
+
+**ZCode** — ZCode's plugin manifest and marketplace manifest both live in this repository's
+`.zcode-plugin/` directory (`plugin.json` is the plugin manifest, `marketplace.json` is the
+local test marketplace manifest). In the ZCode client: **Plugin Marketplace (Discover tab) →
+`+` Add Marketplace**, paste the `.zcode-plugin` directory path (e.g.
+`D:\code\kaying-office\kaying-for-tuanjie\.zcode-plugin`) or the file path of its
+`marketplace.json`, then find **kaying-for-tuanjie** in the market and click **Install**.
+
+**KayingCode** — same flow as ZCode, but add the `.kayingcode-plugin/` directory (or its
+`marketplace.json`) as the marketplace. Its two manifests are the ZCode manifests with
+KayingCode-facing copy; the plugin ID is identical (`tuanjie@kaying-for-tuanjie-marketplace`).
+
+> Note: `source.path` in the ZCode/KayingCode `marketplace.json` files is an absolute path
+> pointing at the repository root (they do not allow `..` references outside the marketplace
+> for security reasons), so update both if the repository moves. The Claude Code, Codex and Pi
+> manifests use relative paths and need no edit.
 
 ### Verify it worked
 
-Type `/` in a session or check **Settings → Skills**: the `tuanjie:`-prefixed skills (e.g.
-`tuanjie:tuanjie-cli`, `tuanjie:tilemap-palette-create`) should be listed.
+Each agent surfaces an installed plugin differently.
+
+**Claude Code** — type `/tuanjie:` and the skills appear in the command list. `/plugin` also
+shows `tuanjie` as installed and enabled.
+
+**Codex** — run `codex plugin list`:
+
+```
+PLUGIN                      STATUS              VERSION
+tuanjie@kaying-for-tuanjie  installed, enabled  0.1.0
+```
+
+**Pi** — run `pi list` to see the package, then inside a session type `/tuanjie skills` to
+enumerate the bundled skills. `/tuanjie doctor` reports whether the current directory is a
+Tuanjie project and the engine version from `ProjectSettings/ProjectVersion.txt`.
+
+**ZCode / KayingCode** — open **Settings → Plugin Management** and confirm `tuanjie` shows as
+enabled on the Installed tab. In a session, type `/` or check **Settings → Skills**: the
+`tuanjie:`-prefixed skills (e.g. `tuanjie:tuanjie-cli`, `tuanjie:tilemap-palette-create`)
+should be listed. The plugin is enabled by default and triggers automatically on
+Tuanjie-related requests.
+
+### Manual install
+
+If you can't use the marketplace/install commands, link the checkout into your personal skills
+directory instead (Claude Code shown; other agents that read a plain skills folder work the
+same way):
+
+```bash
+git clone https://github.com/kaying-studio/kaying-for-tuanjie.git
+ln -s "$(pwd)/kaying-for-tuanjie" ~/.claude/skills/tuanjie
+```
+
+**Pi** — link it into Pi's global skills directory, or add the path to `settings.json`:
+
+```bash
+ln -s "$(pwd)/kaying-for-tuanjie" ~/.pi/agent/skills/tuanjie
+```
+
+```json
+{
+  "skills": ["/path/to/kaying-for-tuanjie/skills"]
+}
+```
+
+It loads automatically in every project from your next session onward.
 
 ## Usage
 

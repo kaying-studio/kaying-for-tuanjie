@@ -1,0 +1,14 @@
+{
+  "name": "kaying-for-tuanjie",
+  "description": "Tuanjie Engine game-development skills for coding agents, packaging Tuanjie domain knowledge as agent skills.",
+  "owner": {
+    "name": "kaying-studio"
+  },
+  "plugins": [
+    {
+      "name": "tuanjie",
+      "source": "./",
+      "description": "Tuanjie Engine (团结引擎) game-development skills. Automate the Tuanjie editor, manage packages.unity.cn packages, and build for WeChat Mini Game and China-market channels with guidance grounded in Unity's documented practices."
+    }
+  ]
+}

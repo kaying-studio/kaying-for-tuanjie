@@ -1,0 +1,52 @@
+{
+  "name": "tuanjie",
+  "displayName": "kaying-for-tuanjie",
+  "version": "0.1.0",
+  "description": "Tuanjie Engine (团结引擎) game-development skills for Pi — adapted from Unity's official agent plugin with Tuanjie-specific tooling, WeChat Mini Game awareness, and China-market guidance.",
+  "author": {
+    "name": "kaying-studio"
+  },
+  "homepage": "https://github.com/kaying-studio/kaying-for-tuanjie",
+  "license": "LicenseRef-Unity-Companion-License",
+  "keywords": [
+    "pi-package",
+    "tuanjie",
+    "团结引擎",
+    "unity-china",
+    "gamedev",
+    "game-development",
+    "wechat-minigame",
+    "openharmony",
+    "urp",
+    "tilemap",
+    "in-app-purchases",
+    "localization"
+  ],
+  "harness": "pi",
+  "pi": {
+    "skills": "./skills/",
+    "extensions": [
+      "./extensions/tuanjie.ts"
+    ],
+    "packageManifest": "./package.json"
+  },
+  "interface": {
+    "displayName": "kaying-for-tuanjie",
+    "shortDescription": "Build, tune, ship Tuanjie games",
+    "longDescription": "Use Tuanjie Engine curated skills to develop your game, connect China-market monetization, and optimize performance across platforms — editor-binary automation, packages.unity.cn registry, WeChat Mini Game and OpenHarmony guidance.",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "requiresLocalExecutor": true,
+    "defaultPrompt": [
+      "Set up a tilemap level with rule tiles in my Tuanjie 2D game.",
+      "Migrate a Unity 2022 project to Tuanjie Engine and fix package resolution.",
+      "Add IAP for WeChat Mini Game and the Apple App Store."
+    ]
+  },
+  "skills": "./skills/",
+  "requires_local_executor": true
+}

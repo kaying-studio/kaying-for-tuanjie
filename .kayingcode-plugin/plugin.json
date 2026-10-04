@@ -1,0 +1,24 @@
+{
+  "name": "tuanjie",
+  "version": "0.1.0",
+  "description": "Tuanjie Engine (团结引擎) game-development skills for coding agents — adapted from Unity's official agent plugin with Tuanjie-specific tooling, WeChat Mini Game awareness, and China-market guidance.",
+  "author": {
+    "name": "kaying-studio"
+  },
+  "homepage": "https://github.com/kaying-studio/kaying-for-tuanjie",
+  "license": "LicenseRef-Unity-Companion-License",
+  "keywords": [
+    "tuanjie",
+    "团结引擎",
+    "unity-china",
+    "gamedev",
+    "game-development",
+    "wechat-minigame",
+    "openharmony",
+    "urp",
+    "tilemap",
+    "in-app-purchases",
+    "localization"
+  ],
+  "skills": "./skills"
+}
